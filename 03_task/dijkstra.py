@@ -12,12 +12,12 @@ def dijkstra_path(graph, from_node) -> dict[(float, list[str])]:
 
         cur_distance, cur_path = distances[current_vertex]
         if cur_distance == float('infinity'):
+            # all available routes have been checked
             break
 
         for neighbor in graph[current_vertex]:
             weight = graph[current_vertex][neighbor]["weight"]
             distance = cur_distance + weight
-
             # If new distance is shorter than update shortest path
             if distance < distances[neighbor][0]:
                 distances[neighbor] = (distance, cur_path+[neighbor])
