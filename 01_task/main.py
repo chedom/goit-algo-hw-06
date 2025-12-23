@@ -1,22 +1,13 @@
-import json
+import sys
+from pathlib import Path
 
-import networkx as nx
 import matplotlib.pyplot as plt
+import networkx as nx
 
+# Add project root to Python path to import `metro_graph`
+sys.path.insert(0, str(Path(__file__).parent.parent))
 
-def create_metro_graph(metro_lines: list[list[str]]):
-    G = nx.Graph()
-
-    for line_idx, line in enumerate(metro_lines):
-        line_size = len(line)
-        for i in range(line_size):
-            if i == line_size - 1:  # the last station
-                break
-
-            weight = (i % 2) + 1  # create predictable weight
-            G.add_edge(line[i], line[i+1], weight=weight, line_id=line_idx)
-
-    return G
+from metro_graph import create_metro_graph
 
 
 def show_graph_info(G):
@@ -54,12 +45,9 @@ def draw_map(G):
 
 
 def main():
-    # metro_lines.json is an array of Paris metro lines
-    with open("./01_task/metro_lines.json", "r", encoding="utf8") as f:
-        data = json.load(f)
-        G = create_metro_graph(data)
-        show_graph_info(G)
-        draw_map(G)
+    G = create_metro_graph()
+    show_graph_info(G)
+    draw_map(G)
 
 
 if __name__ == '__main__':
