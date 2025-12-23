@@ -25,6 +25,15 @@ def show_graph_info(G):
     is_connected = nx.is_connected(G)
     print(f"Num of nodes: {num_nodes}, num of edges: {num_edges}, graph is connected: {is_connected}")
 
+    degree_centrality = nx.degree_centrality(G)
+    print(f"Degree centrality: ${degree_centrality}")
+
+    closeness_centrality = nx.closeness_centrality(G)
+    print(f"Closeness centrality: ${closeness_centrality}")
+
+    betweenness_centrality = nx.betweenness_centrality(G) 
+    print(f"Betweenness centrality: ${betweenness_centrality}")
+
 
 def draw_map(G):
     plt.figure(figsize=(20, 15))  # Make the canvas large
